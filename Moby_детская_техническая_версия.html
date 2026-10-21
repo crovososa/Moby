@@ -1,0 +1,624 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Moby Бонусы</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800;900&family=Nunito:wght@600;700;800;900&display=swap">
+<style>
+/* Direction: a kids' pocket-money app. Night-blue to magenta gradient for hero moments,
+   orange as the single action colour, white cards on a cool lavender ground. */
+:root{
+  --ink:#1c1a3d; --muted:#7b7996; --bg:#f3f3fa; --card:#fff; --track:#e7e6f2;
+  --orange:#ff4d12; --orange-soft:#fff0ea; --indigo:#3c40c6; --violet:#7a2fc0; --magenta:#b3207a;
+  --grad:linear-gradient(170deg,#3c40c6 0%,#7a2fc0 55%,#b3207a 100%);
+  --shadow:0 10px 24px -14px rgba(28,26,61,.35);
+}
+*{box-sizing:border-box}
+body{margin:0;background:#dedef0;color:var(--ink);font-family:Nunito,system-ui,sans-serif;font-size:15px;line-height:1.4}
+button,input{font:inherit;color:inherit}
+h1,h3,p{margin:0}
+.app{max-width:440px;min-height:100vh;margin:0 auto;background:var(--bg);position:relative;padding-bottom:110px;overflow-x:hidden}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px 8px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.logo{display:flex;align-items:center;gap:8px;font-family:Unbounded,sans-serif;font-weight:800;font-size:17px}
+.pill{display:flex;align-items:center;gap:6px;border:0;border-radius:999px;background:#fff;padding:6px 14px 6px 8px;font-weight:800;box-shadow:var(--shadow);cursor:pointer}
+.pill .coin{width:20px;height:20px}
+.screen{display:grid;gap:14px;align-content:start;padding-block:14px 8px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));min-width:0}
+.night{background:var(--grad);color:#fff;min-height:calc(100vh - 60px);padding-block:20px 8px}
+.h1{font-family:Unbounded,sans-serif;font-weight:900;font-size:24px;line-height:1.1;color:var(--orange);text-transform:uppercase;text-wrap:balance}
+.h3{font-family:Unbounded,sans-serif;font-weight:800;font-size:16px}
+.muted{color:var(--muted)}
+.greet{display:flex;align-items:center;gap:10px;min-width:0}
+.mascot-box{width:96px;height:96px;flex:none}
+.mascot-box.sm{width:76px;height:76px}
+.mascot-box svg{width:100%;height:100%;display:block}
+.bubble{position:relative;flex:1;min-width:0;background:var(--orange);color:#fff;font-weight:800;border-radius:20px;padding:12px 14px;box-shadow:0 12px 24px -12px rgba(255,77,18,.8);line-height:1.3}
+.bubble::before{content:"";position:absolute;left:-8px;bottom:14px;border:8px solid transparent;border-left:0;border-right-color:var(--orange)}
+.card{background:var(--card);border-radius:20px;padding:16px;box-shadow:var(--shadow);display:grid;gap:12px;min-width:0}
+.list{display:grid;gap:10px;min-width:0}
+.row{display:flex;align-items:center;gap:12px;width:100%;background:var(--card);border:0;border-radius:18px;padding:14px 16px;box-shadow:var(--shadow);text-align:left;cursor:pointer;min-width:0}
+.row .grow{flex:1;min-width:0;font-weight:700;overflow-wrap:anywhere}
+.row:disabled{cursor:default;opacity:.75}
+.check{width:26px;height:26px;border-radius:50%;border:2.5px solid #d6d4e6;flex:none;display:grid;place-items:center;transition:background .2s}
+.row.done .check{background:var(--orange);border-color:var(--orange)}
+.row.done .grow{text-decoration:line-through;color:var(--muted)}
+.row.done .check::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.chip{flex:none;font-weight:900;font-size:13px;color:var(--orange);background:var(--orange-soft);border-radius:999px;padding:4px 10px;white-space:nowrap}
+.progress-line{display:flex;justify-content:space-between;align-items:center;gap:10px;font-weight:800;font-size:13px;color:var(--muted);flex-wrap:wrap}
+.progress-line .bar{flex:1 1 160px}
+.bar{height:12px;border-radius:99px;background:var(--track);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--orange);border-radius:inherit;transition:width .4s ease}
+.bar.light{background:rgba(255,255,255,.25)}
+.bar.light i{background:#fff}
+.hero{background:var(--grad);color:#fff;border-radius:24px;padding:18px;box-shadow:0 18px 30px -18px rgba(122,47,192,.8);display:grid;gap:6px;min-width:0}
+.hero .lbl{font-size:13px;font-weight:700;opacity:.85}
+.hero .amt{font-family:Unbounded,sans-serif;font-weight:900;font-size:32px;overflow-wrap:anywhere}
+.hero .foot{display:flex;justify-content:space-between;align-items:center;gap:10px;font-weight:700;font-size:14px;margin-top:6px}
+.btn{background:var(--orange);color:#fff;border:0;border-radius:16px;padding:13px 18px;font-weight:900;cursor:pointer;box-shadow:0 10px 20px -10px rgba(255,77,18,.9)}
+.btn.ghost{background:var(--track);color:var(--ink);box-shadow:none}
+.btn.light{background:#fff;color:var(--indigo);box-shadow:none}
+.btn.line{background:none;color:var(--orange);box-shadow:none;border:2px dashed #ffc2ad;width:100%}
+.btn:focus-visible,.row:focus-visible,.game:focus-visible,.tile:focus-visible,.pill:focus-visible,.nav button:focus-visible,.x:focus-visible{outline:3px solid var(--indigo);outline-offset:2px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tile{border:0;background:var(--card);border-radius:18px;padding:12px 10px;min-height:104px;display:grid;align-content:space-between;justify-items:start;gap:8px;text-align:left;font-weight:800;font-size:13px;line-height:1.2;color:var(--orange);box-shadow:var(--shadow);cursor:pointer;min-width:0}
+.tile .ico{width:36px;height:36px;border-radius:12px;background:var(--orange-soft);display:grid;place-items:center}
+.tile .ico svg{width:20px;height:20px}
+.game{display:flex;align-items:center;gap:14px;width:100%;background:var(--card);border:0;border-radius:24px;padding:14px;box-shadow:var(--shadow);text-align:left;cursor:pointer;min-width:0}
+.game .grow{flex:1;min-width:0;display:grid;gap:3px}
+.game b{font-family:Unbounded,sans-serif;font-size:15px}
+.game small{color:var(--muted);font-weight:700}
+.game:disabled{opacity:.5;cursor:default}
+.thumb{width:72px;height:72px;border-radius:20px;background:var(--c);flex:none;display:grid;place-items:center;color:#fff;font-family:Unbounded,sans-serif;font-weight:900;font-size:24px;box-shadow:inset 0 -6px 0 rgba(0,0,0,.12)}
+.exp{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 2px;border-bottom:1px dashed var(--track)}
+.exp:last-child{border-bottom:0}
+.exp span{min-width:0;overflow-wrap:anywhere;font-weight:700}
+.exp b{white-space:nowrap}
+.orb{width:min(72vw,280px);aspect-ratio:1;max-width:100%;border-radius:50%;margin:10px auto 0;background:rgba(255,255,255,.16);box-shadow:inset 0 0 0 2px rgba(255,255,255,.28),0 0 60px -10px rgba(255,255,255,.35);display:grid;place-items:center;text-align:center}
+.orb b{display:block;font-family:Unbounded,sans-serif;font-weight:900;font-size:56px;line-height:1}
+.orb small{display:block;font-weight:800;font-size:20px}
+.glass{background:rgba(255,255,255,.14);border-radius:22px;padding:16px;display:grid;gap:12px;min-width:0}
+.glass h3{font-family:Unbounded,sans-serif}
+.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.mem button{aspect-ratio:1;border:0;border-radius:14px;background:var(--indigo);color:#fff;font-size:22px;font-weight:900;cursor:pointer;min-width:0}
+.mem button.open{background:#fff;color:var(--indigo);box-shadow:inset 0 0 0 3px var(--indigo)}
+.mem button.ok{background:#d8f5e3;color:#16855a}
+.tap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tap-grid button{aspect-ratio:1;border:0;border-radius:18px;background:var(--track);cursor:pointer;min-width:0}
+.tap-grid button.coin{background:radial-gradient(circle at 35% 30%,#ffe27a,#ffb300 60%,#e08a00);box-shadow:0 0 0 4px #fff3c4}
+.mq{font-family:Unbounded,sans-serif;font-weight:900;font-size:30px;text-align:center;padding:14px 0;overflow-wrap:anywhere}
+.inline{display:flex;gap:10px;min-width:0}
+.inline input{flex:1;min-width:0}
+.nav{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:440px;background:#fff;border-radius:26px 26px 0 0;box-shadow:0 -12px 30px -14px rgba(28,26,61,.35);display:grid;grid-template-columns:repeat(5,1fr);padding:8px 6px calc(10px + env(safe-area-inset-bottom,0px));z-index:20}
+.nav button{background:none;border:0;display:grid;justify-items:center;gap:3px;font-weight:800;font-size:11px;color:var(--muted);cursor:pointer;padding:4px 0;min-width:0}
+.nav button svg{width:22px;height:22px}
+.nav button[aria-current="page"]{color:var(--ink)}
+.nav .main{color:var(--orange)}
+.nav .main .dot{width:58px;height:58px;border-radius:50%;background:var(--orange);color:#fff;display:grid;place-items:center;margin-top:-30px;box-shadow:0 12px 24px -8px rgba(255,77,18,.9);border:5px solid var(--bg)}
+.nav .main .dot svg{width:26px;height:26px}
+.sheet-wrap{position:fixed;inset:0;background:rgba(20,18,50,.5);display:flex;align-items:flex-end;justify-content:center;z-index:30}
+.sheet{width:100%;max-width:440px;background:#fff;border-radius:26px 26px 0 0;padding:18px max(16px,env(safe-area-inset-right,0px)) calc(18px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));max-height:88vh;overflow:auto;display:grid;gap:14px;min-width:0}
+.sheet label{display:grid;gap:6px;font-weight:800;font-size:13px;color:var(--muted)}
+.sheet input{width:100%;min-width:0;border:2px solid var(--track);border-radius:14px;padding:12px 14px;font-weight:700;font-size:16px;color:var(--ink);background:#fff}
+.sheet input:focus{outline:none;border-color:var(--indigo)}
+.between{display:flex;align-items:center;justify-content:space-between;gap:10px;font-weight:800}
+.x{border:0;background:var(--track);width:34px;height:34px;border-radius:50%;font-size:20px;line-height:1;cursor:pointer;flex:none}
+.row-btns{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:112px;background:var(--ink);color:#fff;font-weight:800;padding:12px 16px;border-radius:14px;z-index:40;width:max-content;max-width:calc(100% - 32px);text-align:center;box-shadow:0 12px 24px -10px rgba(0,0,0,.5)}
+</style>
+<div class="app">
+<header class="topbar">
+  <div class="logo">
+    <svg width="30" height="24" viewBox="0 0 30 24" aria-hidden="true"><defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#3c40c6"/><stop offset="1" stop-color="#ff4d12"/></linearGradient></defs><path d="M3 21V4l6 9 6-9v17" fill="none" stroke="url(#lg)" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/></svg>
+    Moby
+  </div>
+  <button class="pill" data-go="bonus" aria-label="Открыть бонусы"><svg class="coin" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#ffb300"/><circle cx="10" cy="10" r="5.5" fill="#ffd54f"/></svg><span id="pillBonus">0</span></button>
+</header>
+
+<!-- HOME -->
+<section class="screen" data-screen="home" hidden>
+  <div class="greet">
+    <div class="mascot-box" data-mascot></div>
+    <div class="bubble">Привет, Саша! Что сегодня сделаем?</div>
+  </div>
+  <div class="hero">
+    <p class="lbl">Мой баланс</p>
+    <p class="amt"><span id="balByn">67.00</span> BYN</p>
+    <div class="foot"><span>Бонусов: <b id="homeBonus">0</b></span><button class="btn light" data-go="spend">Траты</button></div>
+  </div>
+  <div class="tiles">
+    <button class="tile" data-go="games"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9h12a4 4 0 0 1 4 4v1a3 3 0 0 1-5 2l-1-1H8l-1 1a3 3 0 0 1-5-2v-1a4 4 0 0 1 4-4z"/></svg></span>Игры</button>
+    <button class="tile" data-go="tasks"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg></span>Ежедневные задачи</button>
+    <button class="tile" data-scroll="lessons"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M4 5h16v11H4zM10 9l4 2.5-4 2.5z"/><path d="M8 20h8"/></svg></span>Обучалки: видео и лекции</button>
+  </div>
+  <h3 class="h3" id="lessons">Обучалки</h3>
+  <div class="list" id="lessonList"></div>
+</section>
+
+<!-- TASKS -->
+<section class="screen" data-screen="tasks" hidden>
+  <h1 class="h1">Задачи от родителей</h1>
+  <div class="greet">
+    <div class="mascot-box" data-mascot></div>
+    <div class="bubble">Выполняй задачи от родителей и получай бонусы!</div>
+  </div>
+  <div class="progress-line"><span id="taskCount">0 из 6</span><div class="bar"><i id="taskBar"></i></div></div>
+  <div class="list" id="taskList"></div>
+</section>
+
+<!-- GAMES -->
+<section class="screen" data-screen="games" hidden>
+  <div class="between">
+    <h1 class="h1">Игры</h1>
+    <div class="mascot-box sm" data-mascot></div>
+  </div>
+  <div class="list" id="gameList"></div>
+</section>
+
+<!-- BONUS -->
+<section class="screen night" data-screen="bonus" hidden>
+  <div class="orb">
+    <div><b id="bigBonus">0</b><small>бонусов</small></div>
+  </div>
+  <div class="glass">
+    <div class="between"><h3 class="h3">Копилка моби</h3><span><b id="kopSaved">0</b> / <b id="kopGoal">50</b></span></div>
+    <div class="bar light"><i id="kopBar"></i></div>
+    <p>Бонусы копятся за задачи и игры. Положи 5 бонусов в копилку, чтобы накопить на большую цель.</p>
+    <button class="btn light" id="kopPut">Положить 5 бонусов</button>
+  </div>
+</section>
+
+<!-- SPEND -->
+<section class="screen" data-screen="spend" hidden>
+  <div class="greet">
+    <div class="mascot-box" data-mascot></div>
+    <div class="bubble">На что ты потратил сегодня?</div>
+  </div>
+  <div class="card">
+    <div id="expList"></div>
+    <button class="btn line" id="addExp">+ Добавить трату</button>
+  </div>
+  <div class="card">
+    <div>
+      <h3 class="h3">Бонусы</h3>
+      <p class="muted">Ты сегодня пообедал в столовой!</p>
+    </div>
+    <button class="row" id="dinner"><span class="check" aria-hidden="true"></span><span class="grow">обед в столовой</span><span class="chip">10 BYN</span></button>
+    <div class="between">
+      <button class="btn ghost" data-go="bonus">копилка моби</button>
+      <span class="chip">+3 бонуса от папы!</span>
+    </div>
+  </div>
+</section>
+
+<nav class="nav" aria-label="Разделы">
+  <button data-go="tasks"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg>Задачи</button>
+  <button data-go="games"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9h12a4 4 0 0 1 4 4v1a3 3 0 0 1-5 2l-1-1H8l-1 1a3 3 0 0 1-5-2v-1a4 4 0 0 1 4-4z"/></svg>Игры</button>
+  <button data-go="home" class="main"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9h-6v-6H9v6H3z"/></svg></span>Главная</button>
+  <button data-go="spend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M3 7h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 7l12-3v3"/><path d="M16 13h2"/></svg>Траты</button>
+  <button data-go="bonus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5c0-1 1-1.5 2.5-1.5s2.5.6 2.5 1.6-1 1.4-2.5 1.7-2.5.8-2.5 1.8 1 1.6 2.5 1.6 2.5-.5 2.5-1.5"/></svg>Бонусы</button>
+</nav>
+
+<!-- SHEETS -->
+<div class="sheet-wrap" id="expSheet" hidden>
+  <form class="sheet" id="expForm" autocomplete="off">
+    <div class="between"><h3 class="h3">Новая трата</h3><button type="button" class="x" data-close aria-label="Закрыть">×</button></div>
+    <label>Что купил
+      <input id="expName" required maxlength="30" placeholder="Например, мороженое">
+    </label>
+    <label>Сколько, BYN
+      <input id="expAmt" type="number" min="0.1" max="500" step="0.1" required inputmode="decimal" placeholder="5">
+    </label>
+    <div class="row-btns"><button type="button" class="btn ghost" data-close>Отмена</button><button class="btn" type="submit">Добавить</button></div>
+  </form>
+</div>
+
+<div class="sheet-wrap" id="gameSheet" hidden>
+  <div class="sheet">
+    <div class="between"><h3 class="h3" id="gTitle"></h3><button class="x" data-close aria-label="Закрыть">×</button></div>
+    <div id="gBody" style="display:grid;gap:14px"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<template id="mascotTpl">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <path d="M22 46 26 12 50 32Z" fill="#3c40c6"/>
+    <path d="M98 46 94 12 70 32Z" fill="#3c40c6"/>
+    <ellipse cx="60" cy="72" rx="42" ry="38" fill="#fff"/>
+    <ellipse cx="60" cy="80" rx="26" ry="16" fill="#eef0ff"/>
+    <rect x="26" y="34" width="68" height="48" rx="24" fill="#1c1a3d"/>
+    <path d="M40 57q7-9 14 0M66 57q7-9 14 0" stroke="#fff" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <path d="M54 69q6 6 12 0" stroke="#ff7a3d" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M28 98q32 22 64 0" stroke="#ff4d12" stroke-width="9" fill="none" stroke-linecap="round"/>
+    <circle cx="60" cy="104" r="5" fill="#7a2fc0"/>
+  </svg>
+</template>
+<script>
+(() => {
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const KEY = 'moby-demo-v1';
+const DEF = {
+  balance: 67, bonus: 23, dinner: false,
+  tasks: [
+    {id:'t1', t:'Убрать комнату', r:5, done:false},
+    {id:'t2', t:'Помыть посуду', r:3, done:false},
+    {id:'t3', t:'Вынести мусор', r:2, done:false},
+    {id:'t4', t:'Прочитать 20 страниц', r:4, done:false},
+    {id:'t5', t:'Сходить за хлебом', r:3, done:false},
+    {id:'t6', t:'Полить цветы', r:2, done:false}
+  ],
+  lessons: [
+    {t:'Как работают деньги', p:60},
+    {t:'Что такое бюджет', p:20},
+    {t:'Копим с умом', p:0}
+  ],
+  exp: [{n:'Магазин «Евроопт»', a:10}, {n:'Парк развлечений', a:10}],
+  kop: {saved: 12, goal: 50},
+  gameRewards: {date: '', played: []}
+};
+const GAMES = [
+  {id:'mem',  t:'Найди пару',       d:'Открой карточки и найди одинаковые', r:'награда до 6 бонусов', c:'#3c40c6', g:'★'},
+  {id:'math', t:'Быстрый счёт',     d:'8 примеров, на всё 40 секунд',       r:'1 бонус за верный ответ', c:'#ff4d12', g:'+−'},
+  {id:'tap',  t:'Поймай монетку',   d:'Тапай по монете, пока она не сбежала', r:'1 бонус за 2 монеты', c:'#7a2fc0', g:'●'},
+  {id:'soon', t:'Скоро',            d:'Новая игра уже в разработке',        r:'', c:'#b8b6cc', g:'…', locked:true}
+];
+
+let S;
+let timers = [];
+let toastT;
+const clone = o => JSON.parse(JSON.stringify(o));
+const load = () => {
+  try {
+    const raw = localStorage.getItem(KEY);
+    S = raw ? {...clone(DEF), ...JSON.parse(raw)} : clone(DEF);
+    // Мягкая миграция данных, сохранённых предыдущими версиями прототипа.
+    S.kop = {...clone(DEF.kop), ...(S.kop || {})};
+    S.gameRewards = {...clone(DEF.gameRewards), ...(S.gameRewards || {})};
+    if (!Array.isArray(S.gameRewards.played)) S.gameRewards.played = [];
+    const today = new Date().getFullYear() + '-' + String(new Date().getMonth()+1).padStart(2,'0') + '-' + String(new Date().getDate()).padStart(2,'0');
+    if (S.gameRewards.date !== today) S.gameRewards = {date: today, played: []};
+  } catch (e) { S = clone(DEF); }
+};
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+const r2 = n => Math.round(n * 100) / 100;
+const money = n => r2(n).toFixed(2);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+const rnd = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = rnd(0, i); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const bon = n => {
+  const m = n % 10, h = n % 100;
+  if (h >= 11 && h <= 14) return 'бонусов';
+  if (m === 1) return 'бонус';
+  if (m >= 2 && m <= 4) return 'бонуса';
+  return 'бонусов';
+};
+
+function toast(msg) {
+  const t = $('#toast');
+  t.textContent = msg;
+  t.hidden = false;
+  clearTimeout(toastT);
+  toastT = setTimeout(() => { t.hidden = true; }, 1900);
+}
+
+function earn(n, why) {
+  S.bonus += n;
+  save();
+  renderAll();
+  toast(`+${n} ${bon(n)}${why ? ' · ' + why : ''}`);
+}
+
+function earnGameOnce(id, n, why) {
+  const today = new Date().getFullYear() + '-' + String(new Date().getMonth()+1).padStart(2,'0') + '-' + String(new Date().getDate()).padStart(2,'0');
+  if (S.gameRewards.date !== today) S.gameRewards = {date: today, played: []};
+  if (S.gameRewards.played.includes(id)) {
+    save();
+    renderAll();
+    toast('Награда за эту игру сегодня уже получена');
+    return;
+  }
+  S.gameRewards.played.push(id);
+  earn(n, why);
+}
+
+/* ---------- renders ---------- */
+function renderAll() {
+  $('#pillBonus').textContent = S.bonus;
+  $('#homeBonus').textContent = S.bonus;
+  $('#bigBonus').textContent = S.bonus;
+  $('#balByn').textContent = money(S.balance);
+  renderTasks();
+  renderLessons();
+  renderGames();
+  renderSpend();
+  renderKop();
+}
+
+function renderTasks() {
+  const done = S.tasks.filter(t => t.done).length, n = S.tasks.length;
+  $('#taskCount').textContent = `${done} из ${n} выполнено`;
+  $('#taskBar').style.width = (done / n * 100) + '%';
+  $('#taskList').innerHTML = S.tasks.map(t => `
+    <button class="row${t.done ? ' done' : ''}" data-task="${t.id}" aria-pressed="${t.done}">
+      <span class="check" aria-hidden="true"></span>
+      <span class="grow">${esc(t.t)}</span>
+      <span class="chip">+${t.r}</span>
+    </button>`).join('');
+}
+
+function renderLessons() {
+  $('#lessonList').innerHTML = S.lessons.map((l, i) => `
+    <button class="row" data-lesson="${i}">
+      <span class="grow">${esc(l.t)}<span class="bar" style="margin-top:8px;display:block"><i style="width:${l.p}%"></i></span></span>
+      <span class="chip">${l.p}%</span>
+    </button>`).join('');
+}
+
+function renderGames() {
+  $('#gameList').innerHTML = GAMES.map(g => `
+    <button class="game" data-game="${g.id}" ${g.locked ? 'disabled' : ''}>
+      <span class="thumb" style="background:${g.c}">${g.g}</span>
+      <span class="grow"><b>${g.t}</b><small>${g.d}</small>${g.r ? `<small>${g.r}</small>` : ''}</span>
+    </button>`).join('');
+}
+
+function renderSpend() {
+  $('#expList').innerHTML = S.exp.length
+    ? S.exp.map(e => `<div class="exp"><span>${esc(e.n)}</span><b>${money(e.a)} BYN</b></div>`).join('')
+    : '<p class="muted">Пока трат нет. Добавь первую.</p>';
+  const d = $('#dinner');
+  d.classList.toggle('done', S.dinner);
+  d.disabled = S.dinner;
+}
+
+function renderKop() {
+  S.kop.goal = Math.max(1, Number(S.kop.goal) || 50);
+  S.kop.saved = Math.max(0, Number(S.kop.saved) || 0);
+  $('#kopSaved').textContent = S.kop.saved;
+  $('#kopGoal').textContent = S.kop.goal;
+  $('#kopBar').style.width = Math.min(100, S.kop.saved / S.kop.goal * 100) + '%';
+}
+
+/* ---------- navigation & sheets ---------- */
+function go(name) {
+  $$('[data-screen]').forEach(s => { s.hidden = s.dataset.screen !== name; });
+  $$('.nav [data-go]').forEach(b => {
+    if (b.dataset.go === name) b.setAttribute('aria-current', 'page');
+    else b.removeAttribute('aria-current');
+  });
+  window.scrollTo({ top: 0 });
+}
+
+function stopTimers() { timers.forEach(clearInterval); timers = []; }
+function openSheet(id) { $('#' + id).hidden = false; }
+function closeSheets() {
+  stopTimers();
+  $$('.sheet-wrap').forEach(s => { s.hidden = true; });
+  const grid = $('#memGrid'); if (grid) grid.onclick = null;
+  const tapGrid = $('#tGrid'); if (tapGrid) tapGrid.onclick = null;
+}
+
+// game sheet logic lives in part 4
+/* ---------- mini games ---------- */
+function openGame(id) {
+  const g = GAMES.find(x => x.id === id);
+  if (!g || g.locked) return;
+  stopTimers();
+  $('#gTitle').textContent = g.t;
+  $('#gBody').innerHTML = '';
+  openSheet('gameSheet');
+  ({mem: gameMem, math: gameMath, tap: gameTap})[id]();
+}
+
+function gameMem() {
+  const SYM = ['★', '●', '▲', '■', '♥', '✚'];
+  const deck = shuffle([...SYM, ...SYM]).map(v => ({v, open: false, ok: false}));
+  let first = null, lock = false, found = 0;
+  $('#gBody').innerHTML = `<p class="muted">Открывай по две карточки и найди все ${SYM.length} пары.</p><div class="mem" id="memGrid"></div>`;
+  const grid = $('#memGrid');
+  const draw = () => {
+    grid.innerHTML = deck.map((c, i) => {
+      const cls = c.ok ? 'ok' : c.open ? 'open' : '';
+      return `<button data-i="${i}" class="${cls}" aria-label="карточка ${i + 1}">${c.ok || c.open ? c.v : ''}</button>`;
+    }).join('');
+  };
+  grid.onclick = e => {
+    const b = e.target.closest('button[data-i]');
+    if (!b || lock) return;
+    const c = deck[+b.dataset.i];
+    if (c.open || c.ok) return;
+    c.open = true;
+    draw();
+    if (!first) { first = c; return; }
+    if (first.v === c.v) {
+      first.ok = c.ok = true;
+      first.open = c.open = false;
+      found++;
+      first = null;
+      draw();
+      if (found === SYM.length) {
+        $('#gBody').insertAdjacentHTML('beforeend', '<p class="h3" style="text-align:center">Все пары найдены!</p>');
+        grid.onclick = null;
+        earnGameOnce('mem', 6, 'Найди пару');
+      }
+    } else {
+      lock = true;
+      const f = first;
+      setTimeout(() => { f.open = c.open = false; first = null; lock = false; draw(); }, 700);
+    }
+  };
+  draw();
+}
+
+function gameMath() {
+  const TOTAL = 8;
+  let asked = 0, ok = 0, left = 40, over = false, a, b, op, ans;
+  $('#gBody').innerHTML = `
+    <div class="between"><b id="mTime">40 с</b><b id="mProg">0 / ${TOTAL}</b></div>
+    <div class="mq" id="mQ"></div>
+    <form class="inline" id="mForm" autocomplete="off">
+      <input id="mIn" inputmode="numeric" required aria-label="ответ">
+      <button class="btn" type="submit">Ответить</button>
+    </form>`;
+  const finish = () => {
+    if (over) return;
+    over = true;
+    stopTimers();
+    $('#gBody').innerHTML = `<div class="card" style="text-align:center"><p class="h3">Готово!</p><p class="muted">Верных ответов: ${ok} из ${TOTAL}</p></div>`;
+    if (ok) earnGameOnce('math', ok, 'Быстрый счёт');
+  };
+  const ask = () => {
+    asked++;
+    const k = rnd(0, 2);
+    if (k === 0) { a = rnd(2, 20); b = rnd(2, 20); op = '+'; ans = a + b; }
+    else if (k === 1) { b = rnd(1, 9); ans = rnd(1, 12); a = ans + b; op = '−'; }
+    else { a = rnd(2, 9); b = rnd(2, 9); op = '×'; ans = a * b; }
+    $('#mQ').textContent = `${a} ${op} ${b} = ?`;
+    $('#mProg').textContent = `${asked - 1} / ${TOTAL}`;
+    $('#mIn').focus();
+  };
+  $('#mForm').onsubmit = e => {
+    e.preventDefault();
+    if (over) return;
+    if (Number($('#mIn').value) === ans) ok++;
+    $('#mIn').value = '';
+    if (asked >= TOTAL) finish(); else ask();
+  };
+  timers.push(setInterval(() => {
+    left--;
+    const t = $('#mTime');
+    if (t) t.textContent = left + ' с';
+    if (left <= 0) finish();
+  }, 1000));
+  ask();
+}
+
+function gameTap() {
+  let score = 0, left = 15, cell = -1, over = false;
+  $('#gBody').innerHTML = `
+    <div class="between"><b id="tTime">15 с</b><b>Монеты: <span id="tScore">0</span></b></div>
+    <div class="tap-grid" id="tGrid">${'<button aria-label="ячейка"></button>'.repeat(9)}</div>`;
+  const grid = $('#tGrid');
+  const spawn = () => {
+    if (over) return;
+    if (cell >= 0) grid.children[cell].classList.remove('coin');
+    cell = rnd(0, 8);
+    grid.children[cell].classList.add('coin');
+  };
+  const finish = () => {
+    if (over) return;
+    over = true;
+    stopTimers();
+    $('#gBody').innerHTML = `<div class="card" style="text-align:center"><p class="h3">Время вышло</p><p class="muted">Поймано монет: ${score}</p></div>`;
+    const r = Math.floor(score / 2);
+    if (r) earnGameOnce('tap', r, 'Поймай монетку');
+  };
+  grid.onclick = e => {
+    const b = e.target.closest('button');
+    if (!b || over) return;
+    if ([...grid.children].indexOf(b) === cell) {
+      score++;
+      $('#tScore').textContent = score;
+      b.classList.remove('coin');
+      cell = -1;
+    }
+  };
+  timers.push(setInterval(() => {
+    left--;
+    const t = $('#tTime');
+    if (t) t.textContent = left + ' с';
+    if (left <= 0) finish();
+  }, 1000));
+  timers.push(setInterval(spawn, 700));
+  spawn();
+}
+
+/* ---------- events ---------- */
+document.addEventListener('click', e => {
+  const t = e.target;
+  const nav = t.closest('[data-go]');
+  if (nav) return go(nav.dataset.go);
+  const sc = t.closest('[data-scroll]');
+  if (sc) {
+    go('home');
+    document.getElementById(sc.dataset.scroll).scrollIntoView({behavior: 'smooth'});
+    return;
+  }
+  const task = t.closest('[data-task]');
+  if (task) {
+    const x = S.tasks.find(v => v.id === task.dataset.task);
+    if (x.done) return toast('Уже засчитано');
+    x.done = true;
+    save();
+    return earn(x.r, x.t);
+  }
+  const les = t.closest('[data-lesson]');
+  if (les) {
+    const l = S.lessons[+les.dataset.lesson];
+    if (l.p >= 100) return;
+    l.p = Math.min(100, l.p + 20);
+    save();
+    if (l.p === 100) return earn(2, 'урок пройден');
+    renderLessons();
+    return;
+  }
+  const gm = t.closest('[data-game]');
+  if (gm) return openGame(gm.dataset.game);
+  if (t.closest('[data-close]')) return closeSheets();
+  if (t.classList.contains('sheet-wrap')) return closeSheets();
+  if (t.closest('#addExp')) {
+    $('#expForm').reset();
+    openSheet('expSheet');
+    setTimeout(() => $('#expName').focus(), 0);
+    return;
+  }
+  if (t.closest('#dinner')) {
+    if (S.dinner) return;
+    if (S.balance < 10) return toast('Недостаточно денег для этой покупки');
+    S.dinner = true;
+    S.balance = r2(S.balance - 10);
+    S.exp.unshift({n: 'Обед в столовой', a: 10});
+    save();
+    return earn(3, 'от папы');
+  }
+  if (t.closest('#kopPut')) {
+    if (S.bonus < 5) return toast('Нужно 5 бонусов. Выполни задачу или игру');
+    S.bonus -= 5;
+    S.kop.saved += 5;
+    if (S.kop.saved >= S.kop.goal) {
+      S.bonus += 10;
+      S.kop.goal += 50;
+      toast('Цель копилки выполнена! +10 бонусов');
+    } else {
+      toast('Положено 5 бонусов в копилку');
+    }
+    save();
+    renderAll();
+  }
+});
+
+$('#expForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const n = $('#expName').value.trim();
+  const a = Number($('#expAmt').value);
+  if (!n || !Number.isFinite(a) || !(a > 0)) return;
+  if (a > S.balance) { toast('На балансе недостаточно денег'); return; }
+  S.exp.unshift({n, a: r2(a)});
+  S.balance = r2(S.balance - a);
+  save();
+  closeSheets();
+  renderAll();
+  toast('Трата добавлена');
+});
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSheets(); });
+
+/* ---------- boot ---------- */
+load();
+$$('[data-mascot]').forEach(el => el.replaceChildren($('#mascotTpl').content.cloneNode(true)));
+renderAll();
+go('home');
+})();
+</script>
+</div>
+
+</body></html>
